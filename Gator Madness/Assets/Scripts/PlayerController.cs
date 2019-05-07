@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/* using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,4 +24,4 @@ public class PlayerController : MonoBehaviour
         controller.Move(moveHorizontal * Time.fixedDeltaTime, moveVertical * Time.fixedDeltaTime);
     }
 
-}   
+}  */
