@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c85a6b68d9b640f4a8e0e600f02e1d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 32
+  moveSpeed: 35
   isGrounded: 0
   animator: {fileID: 473518473}
   controller: {fileID: 473518474}

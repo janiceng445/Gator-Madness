@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharMove : MonoBehaviour
 {
-    public float moveSpeed = 32f;
+    public float moveSpeed = 35f;
     public bool isGrounded = false; 
     public Animator animator;
 

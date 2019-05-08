@@ -21,7 +21,7 @@ public class Grounded : MonoBehaviour
     {
         if (collision.collider.tag == "Ground")
         {
-           Player.GetComponent<CharMove>().isGrounded = true;
+            Player.GetComponent<CharMove>().isGrounded = true;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
