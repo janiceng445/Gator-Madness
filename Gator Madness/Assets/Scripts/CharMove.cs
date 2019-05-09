@@ -47,7 +47,7 @@ public class CharMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded == true && !meleeAttacking.attacking)
         {
             jumping = true;
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
+            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f,7f), ForceMode2D.Impulse);
         }
 
         if (jumping && !airAttacking.jumpAttacking)
