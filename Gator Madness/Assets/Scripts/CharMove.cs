@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharMove : MonoBehaviour
 {
     private MeleeAttack meleeAttacking; 
+    private JumpAttack airAttacking; 
 
     public float moveSpeed = 35f;
     public bool isGrounded = false; 
@@ -18,6 +19,7 @@ public class CharMove : MonoBehaviour
     void Start()
     {
         meleeAttacking = gameObject.GetComponent<MeleeAttack>(); 
+        airAttacking = gameObject.GetComponent<JumpAttack>(); 
     }
 
     // Update is called once per frame
@@ -45,10 +47,13 @@ public class CharMove : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded == true && !meleeAttacking.attacking)
         {
             jumping = true;
-            animator.SetBool("isJumping", true); 
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
         }
 
+        if (jumping && !airAttacking.jumpAttacking)
+        {
+            animator.SetBool("isJumping", true);
+        }
     }
     public void onLanding ()
     {

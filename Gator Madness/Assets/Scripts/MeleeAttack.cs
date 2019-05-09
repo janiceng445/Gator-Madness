@@ -8,7 +8,7 @@ public class MeleeAttack : MonoBehaviour
     public bool attacking = false;
 
     private float attackTimer = 0;
-    private float attackCD = 0.5f; 
+    private float attackCD = 0.7f; 
 
     public Collider2D meleeAttackTrigger; 
     
@@ -23,7 +23,7 @@ public class MeleeAttack : MonoBehaviour
 
     void Update ()
     {
-        if (Input.GetKeyDown("f") && !attacking && !groundAttack.jumping) 
+        if (Input.GetKeyDown("f") && !groundAttack.jumping && !attacking) 
         {
             attacking = true; 
            
