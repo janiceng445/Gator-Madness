@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CharMove : MonoBehaviour
 {
+    private MeleeAttack meleeAttacking; 
+
     public float moveSpeed = 35f;
     public bool isGrounded = false; 
+    public bool jumping = false; 
     public Animator animator;
 
     public CharacterController2D controller;
@@ -14,7 +17,7 @@ public class CharMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        meleeAttacking = gameObject.GetComponent<MeleeAttack>(); 
     }
 
     // Update is called once per frame
@@ -22,7 +25,15 @@ public class CharMove : MonoBehaviour
     {
         Jump();
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed; 
+        if (!meleeAttacking.attacking)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * moveSpeed; 
+        }
+        else if (meleeAttacking.attacking)
+        {
+            horizontalMove = 0;
+        }
+        
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
     }
     void FixedUpdate ()
@@ -31,8 +42,9 @@ public class CharMove : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded == true)
+        if (Input.GetButtonDown("Jump") && isGrounded == true && !meleeAttacking.attacking)
         {
+            jumping = true;
             animator.SetBool("isJumping", true); 
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 5f), ForceMode2D.Impulse);
         }
@@ -41,5 +53,6 @@ public class CharMove : MonoBehaviour
     public void onLanding ()
     {
         animator.SetBool("isJumping", false);
+        jumping = false; 
     }
 }
