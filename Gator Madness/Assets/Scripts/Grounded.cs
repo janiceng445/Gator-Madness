@@ -19,6 +19,8 @@ public class Grounded : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // If you are colliding with the Ground, then make the function found in CharMove named isGrounded
+        // true. 
         if (collision.collider.tag == "Ground")
         {
             Player.GetComponent<CharMove>().isGrounded = true;
