@@ -4,27 +4,15 @@ using UnityEngine;
 
 public class MeleeAttackTrigger : MonoBehaviour
 {
-    // Is meleeAttacking enabled?
-    private MeleeAttack MAttacking; 
-
     // Damage Integer
-    public int Damage = 10; 
+    public int Damage = 50; 
 
-    void Awake ()
+    void OnCollisionEnter2D(Collision2D other)
     {
-        // Define referencing variables from other scripts
-        MAttacking = gameObject.GetComponent<MeleeAttack>(); 
-    }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (MAttacking.attacking)
+        if (other.gameObject.tag == "Enemy")
         {
-            if (other.gameObject.tag == "Enemy")
-            {
-                other.gameObject.GetComponent<EnemyComp>().DamageEnemy(Damage); 
-                Debug.Log ("We hit " + other.gameObject.name + " and did " + Damage + "damage.");
-            }
+            other.gameObject.GetComponent<EnemyComp>().DamageEnemy(Damage); 
+            Debug.Log ("We hit " + other.gameObject.name + " and did " + Damage + " damage.");
         }
     }
 }

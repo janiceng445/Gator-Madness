@@ -1,4 +1,4 @@
-﻿    using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,7 @@ public class EnemyComp : MonoBehaviour
     public void DamageEnemy (int damage) 
     {
         stats.Health -= damage; 
-        if (stats.Health < 0)
+        if (stats.Health <= 0)
         {
             GameMaster.KillEnemy (this);
         }

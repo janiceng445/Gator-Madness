@@ -44,7 +44,7 @@ public class EnemyAI : MonoBehaviour
             if (!searchingForPlayer)
             {
                 searchingForPlayer = true; 
-                StartCoroutine (SearchForPower()); 
+                StartCoroutine (SearchForPlayer()); 
             }
             return; 
         }
@@ -55,13 +55,13 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine (UpdatePath ());
     }
 
-    IEnumerator SearchForPower () 
+    IEnumerator SearchForPlayer () 
     {
         GameObject sResult = GameObject.FindGameObjectWithTag ("Player"); 
         if (sResult == null)
         {
             yield return new WaitForSeconds ( 0.5f ); 
-            StartCoroutine (SearchForPower());
+            StartCoroutine (SearchForPlayer());
         }
     
         else 
@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
             if (!searchingForPlayer)
             {
                 searchingForPlayer = true; 
-                StartCoroutine (SearchForPower()); 
+                StartCoroutine (SearchForPlayer()); 
             }
             yield return null; 
         }

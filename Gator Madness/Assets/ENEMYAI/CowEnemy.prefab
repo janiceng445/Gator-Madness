@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 3752321756876057747}
   - component: {fileID: 3752321756876057749}
   - component: {fileID: 128691327508421665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CowEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

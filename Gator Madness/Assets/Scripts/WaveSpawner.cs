@@ -19,8 +19,10 @@ public class WaveSpawner : MonoBehaviour
 
     private int nextWave = 0; 
 
+    public Transform[] spawnPoints;
+
     public float timeBetweenWaves = 5f; 
-    public float waveCountdown; 
+    private float waveCountdown; 
 
     private float searchCountdown = 1f; 
 
@@ -29,7 +31,10 @@ public class WaveSpawner : MonoBehaviour
     void Start ()
     {
         waveCountdown = timeBetweenWaves;
-
+        if (spawnPoints.Length == 0)
+        {
+            Debug.LogError ("No Spawn Points Referenced."); 
+        }
     }
 
     void Update ()
@@ -40,7 +45,7 @@ public class WaveSpawner : MonoBehaviour
             if (!EnemyIsAlive())
             {
                 // Begin new round
-                Debug.Log ("Wave Completed!"); 
+                WaveCompleted();
             }
 
             else
@@ -64,6 +69,41 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
+    void WaveCompleted ()
+    {
+        Debug.Log ("Wave Completed");
+        
+        state = SpawnState.COUNTING;
+        waveCountdown = timeBetweenWaves;
+
+        if (nextWave + 1 > waves.Length - 1)
+        {
+            nextWave = 0; 
+            Debug.Log ("Completed all Waves. Looping"); 
+
+        }
+
+        else
+        {
+            nextWave++;
+        }
+    }
+
+    bool EnemyIsAlive ()
+    {
+        searchCountdown -= Time.deltaTime;
+        if (searchCountdown <= 0f)
+        {
+            searchCountdown = 1f; 
+            if (GameObject.FindGameObjectWithTag ("Enemy") == null)
+            {
+                return false; 
+            }
+        }
+
+        return true; 
+    }
+
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log ("Spawning Wave: " + _wave.name); 
@@ -83,22 +123,9 @@ public class WaveSpawner : MonoBehaviour
     void SpawnEnemy (Transform _enemy)
     {
         // Spawn enemy
-        Debug.Log ("Spawning Enemy: " + _enemy.name); 
-        Instantiate (_enemy, transform.position, transform.rotation);
-    }
+        Debug.Log ("Spawning Enemy: " + _enemy.name);
 
-    bool EnemyIsAlive ()
-    {
-        searchCountdown -= Time.deltaTime;
-        if (searchCountdown <= 0f)
-        {
-            searchCountdown = 1f; 
-            if (GameObject.FindGameObjectWithTag ("Enemy") == null)
-            {
-                return false; 
-            }
-        }
-
-        return true; 
+        Transform _sp = spawnPoints[ Random.Range (0, spawnPoints.Length) ]; 
+        Instantiate (_enemy, _sp.position, _sp.rotation);
     }
 }
